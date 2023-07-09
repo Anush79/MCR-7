@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import "./App.css";
+
+import Toaster from "./component/Toaster";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1
+        onClick={() => {
+          toast.success("yello");
+        }}
+        className="text-3xl font-bold underline"
+      >
+        Hello world!
+      </h1>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes>
+      <Toaster />
     </div>
   );
 }
