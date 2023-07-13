@@ -1,4 +1,7 @@
+
+import { NavLink } from "react-router-dom"
 export default function EventCard({item}){
+
 
 /**
      *   {
@@ -22,10 +25,13 @@ export default function EventCard({item}){
       }
      */
 
-return <div className="max-w-[20%] p-2 bg-white text-left rounded-lg">
+return <div className="max-w-[20%] min-w-[20%] p-2 bg-white text-left rounded-lg">
+ <NavLink to={`/${item.id}`}>
 <span className="absolute bg-white p-1 rounded-lg ml-1 mt-1">{item?.eventType} Event</span>
 <img src={item?.eventThumbnail} alt="" className="w-full h-52 object-cover rounded-lg" />
 <small>{item?.eventStartTime}</small>
 <h3 className="font-bold text-2xl">{item.title}</h3>
+
+</NavLink>
 </div>
 }

@@ -1,4 +1,4 @@
-export const eventData={
+export const eventsData={
   "meetups": [
     {
 			"id": "meet001",
