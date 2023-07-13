@@ -5,6 +5,7 @@ import "./App.css";
 
 import Toaster from "./component/Toaster";
 import Landing from "./pages/Landing";
+import Footer from './component/Footer'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Landing />} />
       </Routes>
       <Toaster />
+      <Footer/>
     </div>
   );
 }
