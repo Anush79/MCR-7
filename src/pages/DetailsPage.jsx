@@ -6,17 +6,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { toast } from 'react-toastify';
 
 export default function Details(){
 
   const navigate = useNavigate();
     
   const {eventId} = useParams()
-  const {eventsData} = useData()
+  const {eventsData, setEventDataState} = useData()
   const [formData, setFormData] = useState({
     name:"",
     email:""
   })
+  const [isRSVP, setIsRSVP] = useState(false)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -56,21 +58,28 @@ const doRSVP =()=>{
       eventTags,
     speakers,
     price,
-    isRSVP
+ 
+
   } = eventFound
 const onchangeHandler =(e)=> {
   setFormData((prevData)=>({...prevData, [e.target.name]:e.target.value}))
 }
 const onSubmitHandler=()=>{
-  
+  const newData= eventsData?.meetups?.map(item=>item.id === eventId ? {...item, reservedBy:formData, isRSVP:true}: item) 
+  setEventDataState(newData)
+  setIsRSVP(true)
+  toast.success("Successfully RSVP")
+  handleClose()
 }
 return <div className="flex w-full">
-  <div >
-    <ArrowBack onClick ={()=>{navigate('/')}}/>
+   <ArrowBack onClick ={()=>{navigate('/')}}/>
+   <div className='w-2/3' >
+   <h1 className='text-3xl font-bold' >{title}</h1>
+
     <img src={eventFound?.eventThumbnail} alt=""  className="w-1/2"/>
     <p>{eventDescription}</p>
   </div>
-  <div>
+  <div className='w-1/3'>
     <p>
       {
       isPaid && "₹ "+price
@@ -89,10 +98,13 @@ return <div className="flex w-full">
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <input placeholder='Enter name' type="text" name="name" value ={formData.name}onChange={onchangeHandler} />
-          <input type="email" name="email" id="" placeholder ="Enter Email"onChange={onchangeHandler} />
-          <small>{isPaid && "* you have to make the payment at the venue"}</small>
-          <button onClick={onSubmitHandler}>RVSP</button>
+          <div className='flex flex-col gap-2'>
+             <input placeholder='Enter name' type="text" name="name" value ={formData.name}onChange={onchangeHandler}  className='border-2 p-2'/>
+          <input type="email" name="email" id="" placeholder ="Enter Email"onChange={onchangeHandler} className='border-2 p-2' />
+          <p>{isPaid && "* you have to make the payment at the venue"}</p>
+          <button className='bg-rose-400 p-2 text-white font-bold'  onClick={onSubmitHandler}>RVSP</button>
+          </div>
+         
         </Box>
       </Modal>
     </div>
