@@ -5,24 +5,19 @@ import "./App.css";
 
 import Toaster from "./component/Toaster";
 import Landing from "./pages/Landing";
-import Footer from './component/Footer'
-
+import Footer from "./component/Footer";
+import Header from "./component/Header";
 function App() {
   return (
-    <div className="App">
-      <h1
-        onClick={() => {
-          toast.success("yello");
-        }}
-        className="text-3xl font-bold underline"
-      >
-        Hello world!
-      </h1>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-      </Routes>
-      <Toaster />
-      <Footer/>
+    <div className="App flex flex-col justify-between min-h-screen">
+      <main className="w-full h-full  ">
+     <Header></Header>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+        </Routes>
+        <Toaster />
+      </main>
+      <Footer />
     </div>
   );
 }
