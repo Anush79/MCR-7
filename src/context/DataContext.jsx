@@ -41,7 +41,7 @@ export function DataProvider({ children }) {
     allFilters?.filter==="reset"?eventsData.meetups:
     searchedValue;
 
-  return <DataContext.Provider value={{ eventDataState, searchedValue, filteredData, eventsData, filterDispatch }}>
+  return <DataContext.Provider value={{ eventDataState, setEventDataState,searchedValue, filteredData, eventsData, filterDispatch }}>
     {children}
   </DataContext.Provider>
 }
